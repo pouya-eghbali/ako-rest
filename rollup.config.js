@@ -13,7 +13,7 @@ export default [
   },
   {
     input: "src/netsuite.js",
-    plugins: [commonjs(), resolve(), babel()],
+    plugins: [commonjs(), resolve(), babel({ runtimeHelpers: true })],
     output: [
       {
         file: "dist/netsuite.js",

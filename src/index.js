@@ -19,9 +19,9 @@ class Collection {
     }
   }
   request(method, body) {
-    return this.postOnly
+    const request = this.postOnly
       ? this.fetch(`${this.url}/${method}`, {
-          method: "post",
+          method: "POST",
           body,
           headers: this.headers
         })
@@ -30,46 +30,36 @@ class Collection {
           body,
           headers: this.headers
         });
+    return request
+      .then(response => response.json())
+      .then(result => {
+        if ("error" in result) throw result.error;
+        return result;
+      });
   }
-  async find(selector = {}, options = {}) {
+  find(selector = {}, options = {}) {
     const body = { selector, options };
-    const request = this.request("get", body);
-    const response = await request;
-    const result = await response.json();
-    if ("error" in result) throw result.error;
-    return result;
+    return this.request("GET", body);
   }
-  async findOne(selector = {}, options = {}) {
+  findOne(selector = {}, options = {}) {
     const body = { selector, options: { ...options, limit: 1 } };
-    const request = this.request("get", body);
-    const response = await request;
-    const result = await response.json();
-    if ("error" in result) throw result.error;
-    return result.pop();
+    return this.request("GET", body);
   }
-  async insert(document = {}) {
+  insert(document = {}) {
     const body = document;
-    const request = this.request("post", body);
-    const response = await request;
-    const result = await response.json();
-    if ("error" in result) throw result.error;
-    return result;
+    return this.request("POST", body);
   }
-  async update(selector = {}, modifier = {}, options = {}) {
+  update(selector = {}, modifier = {}, options = {}) {
     const body = { selector, modifier, options };
-    const request = this.request("put", body);
-    const response = await request;
-    const { result } = await response.json();
-    if ("error" in result) throw result.error;
-    return result;
+    return this.request("PATCH", body);
   }
-  async remove(selector = {}) {
+  upsert(selector = {}, modifier = {}, options = {}) {
+    const body = { selector, modifier, options };
+    return this.request("PUT", body);
+  }
+  remove(selector = {}) {
     const body = { selector };
-    const request = this.request("delete", body);
-    const response = await request;
-    const { result } = await response.json();
-    if ("error" in result) throw result.error;
-    return result;
+    return this.request("DELETE", body);
   }
 }
 

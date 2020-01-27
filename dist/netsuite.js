@@ -1,55 +1,112 @@
-define(function() {
-  "use strict";
-
-  function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-    try {
-      var info = gen[key](arg);
-      var value = info.value;
-    } catch (error) {
-      reject(error);
-      return;
-    }
-
-    if (info.done) {
-      resolve(value);
-    } else {
-      Promise.resolve(value).then(_next, _throw);
-    }
-  }
-
-  function _asyncToGenerator(fn) {
-    return function() {
-      var self = this,
-        args = arguments;
-      return new Promise(function(resolve, reject) {
-        var gen = fn.apply(self, args);
-
-        function _next(value) {
-          asyncGeneratorStep(
-            gen,
-            resolve,
-            reject,
-            _next,
-            _throw,
-            "next",
-            value
-          );
-        }
-
-        function _throw(err) {
-          asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-        }
-
-        _next(undefined);
-      });
-    };
-  }
+define(['exports'], function (exports) { 'use strict';
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
+
+  var classCallCheck = _classCallCheck;
+
+  function createCommonjsModule(fn, module) {
+  	return module = { exports: {} }, fn(module, module.exports), module.exports;
+  }
+
+  var _typeof_1 = createCommonjsModule(function (module) {
+    function _typeof(obj) {
+      if (typeof Symbol === "function" && _typeof_1(Symbol.iterator) === "symbol") {
+        module.exports = _typeof = function _typeof(obj) {
+          return _typeof_1(obj);
+        };
+      } else {
+        module.exports = _typeof = function _typeof(obj) {
+          return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof_1(obj);
+        };
+      }
+
+      return _typeof(obj);
+    }
+
+    module.exports = _typeof;
+  });
+
+  function _assertThisInitialized(self) {
+    if (self === void 0) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+
+    return self;
+  }
+
+  var assertThisInitialized = _assertThisInitialized;
+
+  function _possibleConstructorReturn(self, call) {
+    if (call && (_typeof_1(call) === "object" || typeof call === "function")) {
+      return call;
+    }
+
+    return assertThisInitialized(self);
+  }
+
+  var possibleConstructorReturn = _possibleConstructorReturn;
+
+  var getPrototypeOf = createCommonjsModule(function (module) {
+    function _getPrototypeOf(o) {
+      module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+        return o.__proto__ || Object.getPrototypeOf(o);
+      };
+      return _getPrototypeOf(o);
+    }
+
+    module.exports = _getPrototypeOf;
+  });
+
+  var setPrototypeOf = createCommonjsModule(function (module) {
+    function _setPrototypeOf(o, p) {
+      module.exports = _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+        o.__proto__ = p;
+        return o;
+      };
+
+      return _setPrototypeOf(o, p);
+    }
+
+    module.exports = _setPrototypeOf;
+  });
+
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function");
+    }
+
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+      constructor: {
+        value: subClass,
+        writable: true,
+        configurable: true
+      }
+    });
+    if (superClass) setPrototypeOf(subClass, superClass);
+  }
+
+  var inherits = _inherits;
+
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+
+    return obj;
+  }
+
+  var defineProperty = _defineProperty;
 
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
@@ -67,115 +124,7 @@ define(function() {
     return Constructor;
   }
 
-  function _defineProperty(obj, key, value) {
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      });
-    } else {
-      obj[key] = value;
-    }
-
-    return obj;
-  }
-
-  function ownKeys(object, enumerableOnly) {
-    var keys = Object.keys(object);
-
-    if (Object.getOwnPropertySymbols) {
-      var symbols = Object.getOwnPropertySymbols(object);
-      if (enumerableOnly)
-        symbols = symbols.filter(function(sym) {
-          return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-        });
-      keys.push.apply(keys, symbols);
-    }
-
-    return keys;
-  }
-
-  function _objectSpread2(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i] != null ? arguments[i] : {};
-
-      if (i % 2) {
-        ownKeys(Object(source), true).forEach(function(key) {
-          _defineProperty(target, key, source[key]);
-        });
-      } else if (Object.getOwnPropertyDescriptors) {
-        Object.defineProperties(
-          target,
-          Object.getOwnPropertyDescriptors(source)
-        );
-      } else {
-        ownKeys(Object(source)).forEach(function(key) {
-          Object.defineProperty(
-            target,
-            key,
-            Object.getOwnPropertyDescriptor(source, key)
-          );
-        });
-      }
-    }
-
-    return target;
-  }
-
-  function _inherits(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) {
-      throw new TypeError("Super expression must either be null or a function");
-    }
-
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        writable: true,
-        configurable: true
-      }
-    });
-    if (superClass) _setPrototypeOf(subClass, superClass);
-  }
-
-  function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf
-      ? Object.getPrototypeOf
-      : function _getPrototypeOf(o) {
-          return o.__proto__ || Object.getPrototypeOf(o);
-        };
-    return _getPrototypeOf(o);
-  }
-
-  function _setPrototypeOf(o, p) {
-    _setPrototypeOf =
-      Object.setPrototypeOf ||
-      function _setPrototypeOf(o, p) {
-        o.__proto__ = p;
-        return o;
-      };
-
-    return _setPrototypeOf(o, p);
-  }
-
-  function _assertThisInitialized(self) {
-    if (self === void 0) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      );
-    }
-
-    return self;
-  }
-
-  function _possibleConstructorReturn(self, call) {
-    if (call && (typeof call === "object" || typeof call === "function")) {
-      return call;
-    }
-
-    return _assertThisInitialized(self);
-  }
+  var createClass = _createClass;
 
   /**
    * btoa() as defined by the HTML and Infra specs, which mostly just references
@@ -227,6 +176,7 @@ define(function() {
    * corresponding ASCII character.
    */
 
+
   function btoaLookup(idx) {
     if (idx < 26) {
       return String.fromCharCode(idx + "A".charCodeAt(0));
@@ -248,499 +198,218 @@ define(function() {
       return "/";
     } // Throw INVALID_CHARACTER_ERR exception here -- won't be hit in the tests.
 
+
     return undefined;
   }
 
   var btoa_1 = btoa;
 
+  function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
   var Collection =
-    /*#__PURE__*/
-    (function() {
-      function Collection(_ref) {
-        var url = _ref.url,
+  /*#__PURE__*/
+  function () {
+    function Collection(_ref) {
+      var url = _ref.url,
           token = _ref.token,
           postOnly = _ref.postOnly,
           fetch = _ref.fetch;
 
-        _classCallCheck(this, Collection);
+      classCallCheck(this, Collection);
 
-        this.url = url;
-        this.postOnly = postOnly;
-        this.fetch = fetch;
-        this.headers = {
-          Authorization: "Basic ".concat(token)
-        };
+      this.url = url;
+      this.postOnly = postOnly;
+      this.fetch = fetch;
+      this.headers = {
+        Authorization: "Basic ".concat(token)
+      };
 
-        if (!url.match(/\/api\/direct\//)) {
-          var directUrl = url.replace(/\/api\//, "/api/direct/");
-          this.direct = new Collection({
-            url: directUrl,
-            token: token,
-            postOnly: postOnly,
-            fetch: fetch
-          });
-        }
+      if (!url.match(/\/api\/direct\//)) {
+        var directUrl = url.replace(/\/api\//, "/api/direct/");
+        this.direct = new Collection({
+          url: directUrl,
+          token: token,
+          postOnly: postOnly,
+          fetch: fetch
+        });
       }
+    }
 
-      _createClass(Collection, [
-        {
-          key: "request",
-          value: function request(method, body) {
-            return this.postOnly
-              ? this.fetch("".concat(this.url, "/").concat(method), {
-                  method: "post",
-                  body: body,
-                  headers: this.headers
-                })
-              : this.fetch(this.url, {
-                  method: method,
-                  body: body,
-                  headers: this.headers
-                });
-          }
-        },
-        {
-          key: "find",
-          value: (function() {
-            var _find = _asyncToGenerator(
-              /*#__PURE__*/
-              regeneratorRuntime.mark(function _callee() {
-                var selector,
-                  options,
-                  body,
-                  request,
-                  response,
-                  result,
-                  _args = arguments;
-                return regeneratorRuntime.wrap(
-                  function _callee$(_context) {
-                    while (1) {
-                      switch ((_context.prev = _context.next)) {
-                        case 0:
-                          selector =
-                            _args.length > 0 && _args[0] !== undefined
-                              ? _args[0]
-                              : {};
-                          options =
-                            _args.length > 1 && _args[1] !== undefined
-                              ? _args[1]
-                              : {};
-                          body = {
-                            selector: selector,
-                            options: options
-                          };
-                          request = this.request("get", body);
-                          _context.next = 6;
-                          return request;
+    createClass(Collection, [{
+      key: "request",
+      value: function request(method, body) {
+        var request = this.postOnly ? this.fetch("".concat(this.url, "/").concat(method), {
+          method: "POST",
+          body: body,
+          headers: this.headers
+        }) : this.fetch(this.url, {
+          method: method,
+          body: body,
+          headers: this.headers
+        });
+        return request.then(function (response) {
+          return response.json();
+        }).then(function (result) {
+          if ("error" in result) throw result.error;
+          return result;
+        });
+      }
+    }, {
+      key: "find",
+      value: function find() {
+        var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+        var body = {
+          selector: selector,
+          options: options
+        };
+        return this.request("GET", body);
+      }
+    }, {
+      key: "findOne",
+      value: function findOne() {
+        var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+        var body = {
+          selector: selector,
+          options: _objectSpread({}, options, {
+            limit: 1
+          })
+        };
+        return this.request("GET", body);
+      }
+    }, {
+      key: "insert",
+      value: function insert() {
+        var document = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+        var body = document;
+        return this.request("POST", body);
+      }
+    }, {
+      key: "update",
+      value: function update() {
+        var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+        var modifier = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+        var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+        var body = {
+          selector: selector,
+          modifier: modifier,
+          options: options
+        };
+        return this.request("PUT", body);
+      }
+    }, {
+      key: "remove",
+      value: function remove() {
+        var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+        var body = {
+          selector: selector
+        };
+        return this.request("DELETE", body);
+      }
+    }]);
 
-                        case 6:
-                          response = _context.sent;
-                          _context.next = 9;
-                          return response.json();
-
-                        case 9:
-                          result = _context.sent;
-
-                          if (!("error" in result)) {
-                            _context.next = 12;
-                            break;
-                          }
-
-                          throw result.error;
-
-                        case 12:
-                          return _context.abrupt("return", result);
-
-                        case 13:
-                        case "end":
-                          return _context.stop();
-                      }
-                    }
-                  },
-                  _callee,
-                  this
-                );
-              })
-            );
-
-            function find() {
-              return _find.apply(this, arguments);
-            }
-
-            return find;
-          })()
-        },
-        {
-          key: "findOne",
-          value: (function() {
-            var _findOne = _asyncToGenerator(
-              /*#__PURE__*/
-              regeneratorRuntime.mark(function _callee2() {
-                var selector,
-                  options,
-                  body,
-                  request,
-                  response,
-                  result,
-                  _args2 = arguments;
-                return regeneratorRuntime.wrap(
-                  function _callee2$(_context2) {
-                    while (1) {
-                      switch ((_context2.prev = _context2.next)) {
-                        case 0:
-                          selector =
-                            _args2.length > 0 && _args2[0] !== undefined
-                              ? _args2[0]
-                              : {};
-                          options =
-                            _args2.length > 1 && _args2[1] !== undefined
-                              ? _args2[1]
-                              : {};
-                          body = {
-                            selector: selector,
-                            options: _objectSpread2({}, options, {
-                              limit: 1
-                            })
-                          };
-                          request = this.request("get", body);
-                          _context2.next = 6;
-                          return request;
-
-                        case 6:
-                          response = _context2.sent;
-                          _context2.next = 9;
-                          return response.json();
-
-                        case 9:
-                          result = _context2.sent;
-
-                          if (!("error" in result)) {
-                            _context2.next = 12;
-                            break;
-                          }
-
-                          throw result.error;
-
-                        case 12:
-                          return _context2.abrupt("return", result.pop());
-
-                        case 13:
-                        case "end":
-                          return _context2.stop();
-                      }
-                    }
-                  },
-                  _callee2,
-                  this
-                );
-              })
-            );
-
-            function findOne() {
-              return _findOne.apply(this, arguments);
-            }
-
-            return findOne;
-          })()
-        },
-        {
-          key: "insert",
-          value: (function() {
-            var _insert = _asyncToGenerator(
-              /*#__PURE__*/
-              regeneratorRuntime.mark(function _callee3() {
-                var document,
-                  body,
-                  request,
-                  response,
-                  result,
-                  _args3 = arguments;
-                return regeneratorRuntime.wrap(
-                  function _callee3$(_context3) {
-                    while (1) {
-                      switch ((_context3.prev = _context3.next)) {
-                        case 0:
-                          document =
-                            _args3.length > 0 && _args3[0] !== undefined
-                              ? _args3[0]
-                              : {};
-                          body = document;
-                          request = this.request("post", body);
-                          _context3.next = 5;
-                          return request;
-
-                        case 5:
-                          response = _context3.sent;
-                          _context3.next = 8;
-                          return response.json();
-
-                        case 8:
-                          result = _context3.sent;
-
-                          if (!("error" in result)) {
-                            _context3.next = 11;
-                            break;
-                          }
-
-                          throw result.error;
-
-                        case 11:
-                          return _context3.abrupt("return", result);
-
-                        case 12:
-                        case "end":
-                          return _context3.stop();
-                      }
-                    }
-                  },
-                  _callee3,
-                  this
-                );
-              })
-            );
-
-            function insert() {
-              return _insert.apply(this, arguments);
-            }
-
-            return insert;
-          })()
-        },
-        {
-          key: "update",
-          value: (function() {
-            var _update = _asyncToGenerator(
-              /*#__PURE__*/
-              regeneratorRuntime.mark(function _callee4() {
-                var selector,
-                  modifier,
-                  options,
-                  body,
-                  request,
-                  response,
-                  _ref2,
-                  result,
-                  _args4 = arguments;
-
-                return regeneratorRuntime.wrap(
-                  function _callee4$(_context4) {
-                    while (1) {
-                      switch ((_context4.prev = _context4.next)) {
-                        case 0:
-                          selector =
-                            _args4.length > 0 && _args4[0] !== undefined
-                              ? _args4[0]
-                              : {};
-                          modifier =
-                            _args4.length > 1 && _args4[1] !== undefined
-                              ? _args4[1]
-                              : {};
-                          options =
-                            _args4.length > 2 && _args4[2] !== undefined
-                              ? _args4[2]
-                              : {};
-                          body = {
-                            selector: selector,
-                            modifier: modifier,
-                            options: options
-                          };
-                          request = this.request("put", body);
-                          _context4.next = 7;
-                          return request;
-
-                        case 7:
-                          response = _context4.sent;
-                          _context4.next = 10;
-                          return response.json();
-
-                        case 10:
-                          _ref2 = _context4.sent;
-                          result = _ref2.result;
-
-                          if (!("error" in result)) {
-                            _context4.next = 14;
-                            break;
-                          }
-
-                          throw result.error;
-
-                        case 14:
-                          return _context4.abrupt("return", result);
-
-                        case 15:
-                        case "end":
-                          return _context4.stop();
-                      }
-                    }
-                  },
-                  _callee4,
-                  this
-                );
-              })
-            );
-
-            function update() {
-              return _update.apply(this, arguments);
-            }
-
-            return update;
-          })()
-        },
-        {
-          key: "remove",
-          value: (function() {
-            var _remove = _asyncToGenerator(
-              /*#__PURE__*/
-              regeneratorRuntime.mark(function _callee5() {
-                var selector,
-                  body,
-                  request,
-                  response,
-                  _ref3,
-                  result,
-                  _args5 = arguments;
-
-                return regeneratorRuntime.wrap(
-                  function _callee5$(_context5) {
-                    while (1) {
-                      switch ((_context5.prev = _context5.next)) {
-                        case 0:
-                          selector =
-                            _args5.length > 0 && _args5[0] !== undefined
-                              ? _args5[0]
-                              : {};
-                          body = {
-                            selector: selector
-                          };
-                          request = this.request("delete", body);
-                          _context5.next = 5;
-                          return request;
-
-                        case 5:
-                          response = _context5.sent;
-                          _context5.next = 8;
-                          return response.json();
-
-                        case 8:
-                          _ref3 = _context5.sent;
-                          result = _ref3.result;
-
-                          if (!("error" in result)) {
-                            _context5.next = 12;
-                            break;
-                          }
-
-                          throw result.error;
-
-                        case 12:
-                          return _context5.abrupt("return", result);
-
-                        case 13:
-                        case "end":
-                          return _context5.stop();
-                      }
-                    }
-                  },
-                  _callee5,
-                  this
-                );
-              })
-            );
-
-            function remove() {
-              return _remove.apply(this, arguments);
-            }
-
-            return remove;
-          })()
-        }
-      ]);
-
-      return Collection;
-    })();
+    return Collection;
+  }();
 
   var Client =
-    /*#__PURE__*/
-    (function() {
-      function Client(_ref4) {
-        var url = _ref4.url,
-          username = _ref4.username,
-          password = _ref4.password,
-          token = _ref4.token,
-          postOnly = _ref4.postOnly,
-          fetch = _ref4.fetch;
+  /*#__PURE__*/
+  function () {
+    function Client(_ref2) {
+      var url = _ref2.url,
+          username = _ref2.username,
+          password = _ref2.password,
+          token = _ref2.token,
+          postOnly = _ref2.postOnly,
+          fetch = _ref2.fetch;
 
-        _classCallCheck(this, Client);
+      classCallCheck(this, Client);
 
-        this.url = url;
-        this.token = token || btoa_1("".concat(username, ":").concat(password));
-        this.postOnly = postOnly;
-        this.fetch = fetch;
+      this.url = url;
+      this.token = token || btoa_1("".concat(username, ":").concat(password));
+      this.postOnly = postOnly;
+      this.fetch = fetch;
+    }
+
+    createClass(Client, [{
+      key: "collection",
+      value: function collection(name) {
+        return new Collection({
+          token: this.token,
+          url: "".concat(this.url, "/").concat(name),
+          postOnly: this.postOnly,
+          fetch: this.fetch
+        });
       }
+    }]);
 
-      _createClass(Client, [
-        {
-          key: "collection",
-          value: function collection(name) {
-            return new Collection({
-              token: this.token,
-              url: "".concat(this.url, "/").concat(name),
-              postOnly: this.postOnly,
-              fetch: this.fetch
-            });
-          }
-        }
-      ]);
-
-      return Client;
-    })();
+    return Client;
+  }();
 
   var suite = {};
-  define(["N/https"], function(https) {
-    suite.fetch = function(url, _ref) {
-      var method = _ref.method,
-        body = _ref.body,
-        headers = _ref.headers;
-      return https.request.promise({
+  var Client$1 =
+  /*#__PURE__*/
+  function (_restClient) {
+    inherits(Client, _restClient);
+
+    function Client(_ref) {
+      var url = _ref.url,
+          username = _ref.username,
+          password = _ref.password,
+          token = _ref.token,
+          fetch = _ref.fetch,
+          _ref$postOnly = _ref.postOnly,
+          postOnly = _ref$postOnly === void 0 ? true : _ref$postOnly;
+
+      classCallCheck(this, Client);
+
+      return possibleConstructorReturn(this, getPrototypeOf(Client).call(this, {
+        url: url,
+        username: username,
+        password: password,
+        token: token,
+        postOnly: postOnly,
+        fetch: fetch || suite.fetch
+      }));
+    }
+
+    return Client;
+  }(Client);
+  function withHTTPS(https) {
+    suite.fetch = function (url, _ref2) {
+      var method = _ref2.method,
+          body = _ref2.body,
+          headers = _ref2.headers;
+      headers["Content-Type"] = "application/json";
+      body = JSON.stringify(body);
+      var response = https.request({
         url: url,
         method: method,
         headers: headers,
         body: body
       });
+      return {
+        then: function then(fn) {
+          var result = fn({
+            json: function json() {
+              return JSON.parse(response.body);
+            }
+          });
+          return {
+            then: function then(fn) {
+              return fn(result);
+            }
+          };
+        }
+      };
     };
-  });
+  }
 
-  var Client$1 =
-    /*#__PURE__*/
-    (function(_restClient) {
-      _inherits(Client, _restClient);
+  exports.Client = Client$1;
+  exports.withHTTPS = withHTTPS;
 
-      function Client(_ref2) {
-        var url = _ref2.url,
-          username = _ref2.username,
-          password = _ref2.password,
-          token = _ref2.token,
-          fetch = _ref2.fetch,
-          _ref2$postOnly = _ref2.postOnly,
-          postOnly = _ref2$postOnly === void 0 ? true : _ref2$postOnly;
+  Object.defineProperty(exports, '__esModule', { value: true });
 
-        _classCallCheck(this, Client);
-
-        return _possibleConstructorReturn(
-          this,
-          _getPrototypeOf(Client).call(this, {
-            url: url,
-            username: username,
-            password: password,
-            token: token,
-            postOnly: postOnly,
-            fetch: fetch || suite.fetch
-          })
-        );
-      }
-
-      return Client;
-    })(Client);
-
-  return Client$1;
 });
