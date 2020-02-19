@@ -6,7 +6,8 @@ class Collection {
     this.postOnly = postOnly;
     this.fetch = fetch;
     this.headers = {
-      Authorization: `Basic ${token}`
+      Authorization: `Basic ${token}`,
+      "Content-Type": "application/json"
     };
     if (!url.match(/\/api\/direct\//)) {
       const directUrl = url.replace(/\/api\//, "/api/direct/");
@@ -22,12 +23,12 @@ class Collection {
     const request = this.postOnly
       ? this.fetch(`${this.url}/${method}`, {
           method: "POST",
-          body,
+          body: JSON.stringify(body),
           headers: this.headers
         })
       : this.fetch(this.url, {
           method,
-          body,
+          body: JSON.stringify(body),
           headers: this.headers
         });
     return request
@@ -79,23 +80,3 @@ export default class Client {
     });
   }
 }
-
-/*
-
-const test = async () => {
-  const fetch = require("node-fetch");
-  const client = new Client({
-    url: "http://localhost:3000/api",
-    username: "admin",
-    password: "admin",
-    postOnly: true,
-    fetch
-  });
-  const identities = client.collection("identities");
-  const identity = await identities.findOne();
-  console.log(identity);
-};
-
-test();
-
-*/

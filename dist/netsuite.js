@@ -223,7 +223,8 @@ define(['exports'], function (exports) { 'use strict';
       this.postOnly = postOnly;
       this.fetch = fetch;
       this.headers = {
-        Authorization: "Basic ".concat(token)
+        Authorization: "Basic ".concat(token),
+        "Content-Type": "application/json"
       };
 
       if (!url.match(/\/api\/direct\//)) {
@@ -242,11 +243,11 @@ define(['exports'], function (exports) { 'use strict';
       value: function request(method, body) {
         var request = this.postOnly ? this.fetch("".concat(this.url, "/").concat(method), {
           method: "POST",
-          body: body,
+          body: JSON.stringify(body),
           headers: this.headers
         }) : this.fetch(this.url, {
           method: method,
-          body: body,
+          body: JSON.stringify(body),
           headers: this.headers
         });
         return request.then(function (response) {
@@ -290,6 +291,19 @@ define(['exports'], function (exports) { 'use strict';
     }, {
       key: "update",
       value: function update() {
+        var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+        var modifier = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+        var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+        var body = {
+          selector: selector,
+          modifier: modifier,
+          options: options
+        };
+        return this.request("PATCH", body);
+      }
+    }, {
+      key: "upsert",
+      value: function upsert() {
         var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
         var modifier = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
         var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
@@ -382,8 +396,6 @@ define(['exports'], function (exports) { 'use strict';
       var method = _ref2.method,
           body = _ref2.body,
           headers = _ref2.headers;
-      headers["Content-Type"] = "application/json";
-      body = JSON.stringify(body);
       var response = https.request({
         url: url,
         method: method,

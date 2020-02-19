@@ -17,8 +17,6 @@ export class Client extends restClient {
 
 export function withHTTPS(https) {
   suite.fetch = (url, { method, body, headers }) => {
-    headers["Content-Type"] = "application/json";
-    body = JSON.stringify(body);
     const response = https.request({
       url,
       method,
